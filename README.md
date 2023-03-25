@@ -16,9 +16,53 @@ Running a honeypot can potentially expose your system to attackers, so it's impo
 * Network segmentation: Deploy the honeypot on a separate network segment or VLAN to isolate it from other systems on your network.
 * Monitoring: monitor the honeypot logs regularly for any suspicious activity.
 
-## Getting Started
+## Build
 
-TBD
+### Prerequisites
+Having the .net 7 SDK installed to build the executable
+
+### Build process
+
+1. clone the repository
+
+`git clone https://github.com/rojasjo/TelnetHoneypot.Net.git`
+
+2. move to repository root folder
+
+`cd TelnetHoneypot.Net`
+
+3. build the solution with the dotnet CLI, eg:
+
+```dotnet publish -r linux-x64 -p:PublishSingleFile=true --self-contained false```
+
+The program would be located in the publish folder:
+
+`..../TelnetHoneypot.Net/TelnetHoneypot/bin/Debug/{dotnet-sdk-version}/{built-platform}/publish`
+
+For more info https://learn.microsoft.com/en-us/dotnet/core/deploying/single-file/overview?tabs=cli
+
+4. move the file from the publish folder to your desired one
+5. run the program
+
+`./TelnetHoneypot`
+
+## Usage
+
+After executing the program, it starts listening for incoming connections on port 23. Additionally, a folder named `Logs` is created in the same directory as the executable file. You can monitor the contents of this folder to gain insights into any attacker activity.
+
+### Authentication
+
+To emulate the Telnet connection, the user is prompted to authenticate.
+
+#### Valid logins
+
+| Username  | Password |
+| ------------- |:-------------:|
+| admin      | admin     |
+
+### Log
+
+The log is formated as `yyyy-MM-dd HH:mm:ss.fff#LOGTYPE message`  example `2023-03-25 10:22:03.512#COMMAND: quit`
 
 ## Commands
 
@@ -33,10 +77,13 @@ The following commands are supported by the honeypot:
 * __system__: Displays system information.
 * __ping__ <host>: Pings a specified host.
 
+## CVEs
+
+**TBD**
+
 ## Contributing
 
 Contributions to this project are welcome. If you find any issues or have suggestions for improvements, feel free to open an issue or submit a pull request.
-
 
 ## License
 
