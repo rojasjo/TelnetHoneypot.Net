@@ -23,27 +23,27 @@ Having the .net 7 SDK installed to build the executable
 
 ### Build process
 
-1. clone the repository
-
+1. clone the repository:
+>
 `git clone https://github.com/rojasjo/TelnetHoneypot.Net.git`
 
-2. move to repository root folder
-
+2. move to repository root folder:
+>
 `cd TelnetHoneypot.Net`
 
 3. build the solution with the dotnet CLI, eg:
-
+>
 ```dotnet publish -r linux-x64 -p:PublishSingleFile=true --self-contained false```
-
+>
 The program would be located in the publish folder:
-
+>
 `..../TelnetHoneypot.Net/TelnetHoneypot/bin/Debug/{dotnet-sdk-version}/{built-platform}/publish`
-
+>
 For more info https://learn.microsoft.com/en-us/dotnet/core/deploying/single-file/overview?tabs=cli
 
 4. move the file from the publish folder to your desired one
 5. run the program
-
+>
 `./TelnetHoneypot`
 
 ## Usage
@@ -79,7 +79,17 @@ The following commands are supported by the honeypot:
 
 ## CVEs
 
-**TBD**
+If an attacker try to authenticate using one of registered vulnerabilities, it will be clearly visilbe in the log.
+
+```2023-03-25 11:34:44.177#MESSAGE: #CVE useraname: dnsekakf2$$ - password:  - CVE: CVE-2019-8950```
+
+### Registered CVE:
+
+* https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-12045
+* https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-45045
+* https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28152
+* https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-27165
+
 
 ## Contributing
 
