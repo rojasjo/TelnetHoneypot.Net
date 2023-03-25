@@ -3,6 +3,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
 using TelnetHoneypot.Commands;
+using TelnetHoneypot.CVE;
 using TelnetHoneypot.Requests;
 using TelnetHoneypot.Services;
 
@@ -60,8 +61,8 @@ namespace TelnetHoneypot
             using (var swriter = new StreamWriter(writer.Stream, Encoding.ASCII))
             {
                 swriter.AutoFlush = true;
-
-                var authentication = new AuthenticationRequest(writer);
+                var authenticationCve = new AuthenticationCVE();
+                var authentication = new AuthenticationRequest(writer, authenticationCve);
                 authentication.Authenticate(reader);
 
                 while (true)
@@ -70,12 +71,12 @@ namespace TelnetHoneypot
                     var command = reader.ReadLine()?.Trim().ToLower();
 
                     writer.Write(LogType.Command, command);
-                    
+
                     if (command.Equals("quit", StringComparison.OrdinalIgnoreCase))
                     {
                         break;
                     }
-                    
+
                     ProcessCommand(command, writer);
                 }
             }
@@ -89,10 +90,10 @@ namespace TelnetHoneypot
             {
                 commandText = "Unrecognized";
             }
-            
+
             ICommand command = null;
             var args = "";
-            
+
             if (commandText.Equals("help", StringComparison.OrdinalIgnoreCase))
             {
                 command = new HelpCommand(writer);

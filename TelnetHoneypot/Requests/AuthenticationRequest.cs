@@ -1,3 +1,4 @@
+using TelnetHoneypot.CVE;
 using TelnetHoneypot.Services;
 
 namespace TelnetHoneypot.Requests;
@@ -5,10 +6,12 @@ namespace TelnetHoneypot.Requests;
 public class AuthenticationRequest
 {
     private readonly IWriter _writer;
+    private readonly IAuthenticationCVE _authenticationCve;
 
-    public AuthenticationRequest(IWriter writer)
+    public AuthenticationRequest(IWriter writer, IAuthenticationCVE authenticationCve)
     {
         _writer = writer;
+        _authenticationCve = authenticationCve;
     }
 
     public void Authenticate(StreamReader reader)
@@ -24,7 +27,10 @@ public class AuthenticationRequest
             _writer.Write(LogType.Message, "Password: ");
             var password = reader.ReadLine();
 
-            if (username.Equals(defaultUsername) && password.Equals(defaultPassword))
+            var defaultCredentials = username.Equals(defaultUsername) && password.Equals(defaultPassword);
+            var knownCredential = _authenticationCve.AreKnownCredentials(username, password);
+            
+            if (defaultCredentials || knownCredential)
             {
                 _writer.Write(LogType.Message, "Authentication successful.\n");
                 break;
