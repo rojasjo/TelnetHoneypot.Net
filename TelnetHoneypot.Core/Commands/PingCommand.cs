@@ -1,7 +1,7 @@
 using System.Net.NetworkInformation;
-using TelnetHoneypot.Services;
+using TelnetHoneypot.Core.Logging;
 
-namespace TelnetHoneypot.Commands;
+namespace TelnetHoneypot.Core.Commands;
 
 public class PingCommand : ICommand
 {

@@ -1,6 +1,4 @@
-using System.Net.Sockets;
-
-namespace TelnetHoneypot.Commands;
+namespace TelnetHoneypot.Core.Commands;
 
 public interface ICommand
 {

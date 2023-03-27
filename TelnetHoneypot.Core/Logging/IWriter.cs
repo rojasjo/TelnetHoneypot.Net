@@ -1,8 +1,8 @@
-namespace TelnetHoneypot.Services;
+namespace TelnetHoneypot.Core.Logging;
 
 public interface IWriter
 {
-    Stream Stream { get; }
+    Stream Stream { set; }
     
     void Write(LogType logType, string message);
 

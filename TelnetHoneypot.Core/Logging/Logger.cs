@@ -1,4 +1,4 @@
-namespace TelnetHoneypot.Services;
+namespace TelnetHoneypot.Core.Logging;
 
 public class Logger
 {

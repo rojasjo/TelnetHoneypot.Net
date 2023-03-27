@@ -1,7 +1,7 @@
 using System.Globalization;
-using TelnetHoneypot.Services;
+using TelnetHoneypot.Core.Logging;
 
-namespace TelnetHoneypot.Commands;
+namespace TelnetHoneypot.Core.Commands;
 
 public class DateCommand : ICommand
 {
