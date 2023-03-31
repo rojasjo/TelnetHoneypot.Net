@@ -51,7 +51,7 @@ public class AuthenticationService : IAuthenticationService
                 return false;
             }
 
-            writer.Write(LogType.Message, $"#CVE {knownCredential}");
+            writer.Write(LogType.OnlyLog, $"#CVE {knownCredential}");
             return true;
         }
     }
