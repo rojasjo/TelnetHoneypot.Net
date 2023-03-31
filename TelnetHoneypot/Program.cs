@@ -17,7 +17,14 @@ namespace TelnetHoneypot
             var provider = BuildServiceProvider();
             var tcpListenerService = provider.GetService<ITcpListenerService>();
 
-            tcpListenerService?.Listen(TelnetPort);
+            try
+            {
+                tcpListenerService?.Listen(TelnetPort);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         private static ServiceProvider BuildServiceProvider()
